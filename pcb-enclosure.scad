@@ -34,14 +34,14 @@ module pcb_enclosure_body(pcb_length, pcb_width, pcb_height, pcb_thickness=1.6,
     height = height_int + (2 * wall_thickness);    
     box_base_z = feet_radius / 2;
     bolt_radius = (bolt_size * bolt_hole_ratio) / 2;
-
-    to_center = feet_margin + feet_radius;
-    _feet(to_center, to_center, box_base_z, feet_radius);
-    _feet(to_center, width - to_center, box_base_z, feet_radius);
-    _feet(length - to_center, to_center, box_base_z, feet_radius);
-    _feet(length - to_center, width - to_center, box_base_z, feet_radius);
-
-    translate([0, 0, box_base_z]) {
+    rotate([0, -90, -90]) {
+        translate([0, 0, -box_base_z]) {
+            to_center = feet_margin + feet_radius;
+            _feet(to_center, to_center, box_base_z, feet_radius);
+            _feet(to_center, width - to_center, box_base_z, feet_radius);
+            _feet(length - to_center, to_center, box_base_z, feet_radius);
+            _feet(length - to_center, width - to_center, box_base_z, feet_radius);
+        }
         difference() {
             union() {
                 difference() {
