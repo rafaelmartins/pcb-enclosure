@@ -1,6 +1,6 @@
-module _feet(x, y, h, feet_radius) {
+module _foot(x, y, h, foot_radius) {
     translate([x, y, 0])
-        cylinder(h=h, r1=feet_radius/2, r2=feet_radius, $fn = 20);
+        cylinder(h=h, r1=foot_radius/2, r2=foot_radius, $fn = 20);
 }
 
 module _bolt_base(y, z, bolt_size, length) {
@@ -21,7 +21,7 @@ module _pcb_holder(y, z, pcb_holder_size, length) {
 
 module pcb_enclosure_body(pcb_length, pcb_width, pcb_height, pcb_thickness=1.6,
                           pcb_clearance=0.2, pcb_holder_size=1, wall_thickness=2,
-                          feet_margin=5, feet_radius=3, bolt_size=2,
+                          foot_margin=5, foot_radius=3, bolt_size=2,
                           bolt_hole_ratio=0.95) {
 
     // FIXME: convert these into functions
@@ -32,15 +32,15 @@ module pcb_enclosure_body(pcb_length, pcb_width, pcb_height, pcb_thickness=1.6,
     width = width_int + (2 * wall_thickness);
     height_int = pcb_height + pcb_height_bottom + pcb_clearance + pcb_thickness;
     height = height_int + (2 * wall_thickness);
-    box_base_z = feet_radius / 2;
+    box_base_z = foot_radius / 2;
     bolt_radius = (bolt_size * bolt_hole_ratio) / 2;
     rotate([0, -90, -90]) {
         translate([0, 0, -box_base_z]) {
-            to_center = feet_margin + feet_radius;
-            _feet(to_center - wall_thickness, to_center, box_base_z, feet_radius);
-            _feet(to_center - wall_thickness, width - to_center, box_base_z, feet_radius);
-            _feet(length + wall_thickness - to_center, to_center, box_base_z, feet_radius);
-            _feet(length + wall_thickness - to_center, width - to_center, box_base_z, feet_radius);
+            to_center = foot_margin + foot_radius;
+            _foot(to_center - wall_thickness, to_center, box_base_z, foot_radius);
+            _foot(to_center - wall_thickness, width - to_center, box_base_z, foot_radius);
+            _foot(length + wall_thickness - to_center, to_center, box_base_z, foot_radius);
+            _foot(length + wall_thickness - to_center, width - to_center, box_base_z, foot_radius);
         }
         difference() {
             union() {
