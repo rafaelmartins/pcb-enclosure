@@ -31,16 +31,16 @@ module pcb_enclosure_body(pcb_length, pcb_width, pcb_height, pcb_thickness=1.6,
     width_int = pcb_width + pcb_clearance;
     width = width_int + (2 * wall_thickness);
     height_int = pcb_height + pcb_height_bottom + pcb_clearance + pcb_thickness;
-    height = height_int + (2 * wall_thickness);    
+    height = height_int + (2 * wall_thickness);
     box_base_z = feet_radius / 2;
     bolt_radius = (bolt_size * bolt_hole_ratio) / 2;
     rotate([0, -90, -90]) {
         translate([0, 0, -box_base_z]) {
             to_center = feet_margin + feet_radius;
-            _feet(to_center, to_center, box_base_z, feet_radius);
-            _feet(to_center, width - to_center, box_base_z, feet_radius);
-            _feet(length - to_center, to_center, box_base_z, feet_radius);
-            _feet(length - to_center, width - to_center, box_base_z, feet_radius);
+            _feet(to_center - wall_thickness, to_center, box_base_z, feet_radius);
+            _feet(to_center - wall_thickness, width - to_center, box_base_z, feet_radius);
+            _feet(length + wall_thickness - to_center, to_center, box_base_z, feet_radius);
+            _feet(length + wall_thickness - to_center, width - to_center, box_base_z, feet_radius);
         }
         difference() {
             union() {
